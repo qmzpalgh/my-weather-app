@@ -11,11 +11,17 @@ def index():
 @app.route('/weather')
 def get_weather() :
     city = request.args.get('city')
+    state = request.args.get('state')
+    country = request.args.get('country')
 
     #check for empty string
     if not bool(city.strip()):
-        city = "Sydney"
-    weather_data = get_current_weather(city)
+        city = "Frankston"
+    if not bool(state.strip()):
+        state = "VIC"
+    if not bool(country.strip()):
+        country = "AU"
+    weather_data = get_current_weather(city, state, country)
 
     #check for not found
     if not weather_data['cod'] == 200:
